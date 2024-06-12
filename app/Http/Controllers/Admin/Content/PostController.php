@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\admin\content;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Content\Post;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
+use App\Models\Content\PostCategory;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Services\Image\ImageService;
+use App\Http\Requests\Admin\Content\PostRequest;
+use App\Http\Requests\Admin\Content\PostCategoryRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -16,9 +22,9 @@ class PostController extends Controller
      */
     public function index(): View
     {
-        // $postCategories = PostCategory::orderBy('created_at', 'desc')->simplePaginate(15);
+        $posts = Post::orderBy('created_at', 'desc')->simplePaginate(15);
 
-        return view('admin.content.post.index');
+        return view('admin.content.post.index', compact('posts'));
     }
 
     /**
@@ -26,9 +32,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        return view('admin.content.post.create');
+        $postCategories = PostCategory::all();
+        return view('admin.content.post.create', compact('postCategories'));
     }
 
     /**
@@ -37,9 +44,25 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest  $request, ImageService $imageService): RedirectResponse
     {
-        //
+        $inputs = $request->all();
+        //date fixed
+        $realTimestampStart = substr($request->published_at, 0, 10);
+        $inputs['published_at'] = date('Y-m-d H:i:s', (int)$realTimestampStart);
+        if ($request->hasFile('image')) {
+            $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . 'post-category');
+
+            $result = $imageService->createIndexAndSave($request->file('image'));
+            if ($result === false) {
+                return redirect()->route('admin.content.category.index')->with('swal-error', 'آپلود تصویر با خطا مواجه شد');
+            }
+        }
+        $inputs['image'] = $result;
+        $inputs['author_id'] = 1;
+        $post  = Post::create($inputs);
+
+        return redirect()->route('admin.content.post.index')->with('swal-success', '   پست جدید شما با موفقیت ثبت شد');
     }
 
     /**

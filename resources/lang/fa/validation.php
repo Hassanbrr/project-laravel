@@ -134,7 +134,7 @@ return [
         "hour"                      => "ساعت",
         "minute"                    => "دقیقه",
         "second"                    => "ثانیه",
-        "title"                     => "عنوان کالا",
+        "title"                     => "عنوان",
         "text"                      => "متن",
         "content"                   => "محتوا",
         "description"               => "توضیحات ",
@@ -143,7 +143,7 @@ return [
         "time"                      => "زمان",
         "available"                 => "موجود",
         "size"                      => "اندازه",
-		"file"                      => "فایل",
+        "file"                      => "فایل",
         "fullname"                  => "نام کامل",
         "postal_code"               => "کد پستی",
         "comment"                   => "نظر",
@@ -157,7 +157,8 @@ return [
         "priority_id"               => "اولویت",
         "category_id"               => "دسته بندی",
         'status'                    => 'وضعیت',
-        'tags'                      => 'برچسب ها'
+        'tags'                      => 'برچسب ها',
+        'summary'                      => ' خلاصه  '
 
     ],
 ];

@@ -1,7 +1,4 @@
 {
-    "cSpell.ignoreWords": [
-        "commentable",
-        "copan",
-        "id"
-    ]
+    "cSpell.ignoreWords": ["commentable", "copan", "id"],
+    "cSpell.words": ["Cviebrock", "Sluggable"]
 }

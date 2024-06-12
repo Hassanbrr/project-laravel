@@ -59,7 +59,7 @@ return [
      *    'method' => array('Str','slug'),
      */
 
-    'method' => function($string, $separator = '-') {
+    'method' => function ($string, $separator = '-') {
         $_transliteration = array(
             '/ä|æ|ǽ/' => 'ae',
             '/ö|œ/' => 'oe',
@@ -171,7 +171,7 @@ return [
      * If set to "true", then uniqueness is enforced across trashed and existing models.
      */
 
-    'includeTrashed' => false,
+    'includeTrashed' => true,
 
     /**
      * An array of slug names that can never be used for this model,
