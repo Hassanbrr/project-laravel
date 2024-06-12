@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin\content;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,8 +14,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
+        // $postCategories = PostCategory::orderBy('created_at', 'desc')->simplePaginate(15);
+
         return view('admin.content.post.index');
     }
 
