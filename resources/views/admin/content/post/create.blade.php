@@ -42,7 +42,7 @@
                                         value="{{ old('title') }}">
                                 </div>
                                 @error('title')
-                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                    <span class="   p-1 rounded" role="alert">
                                         <strong>
                                             {{ $message }}
                                         </strong>
@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label for="">انتخاب دسته</label>
                                     <select name="category_id" id="" class="form-control form-control-sm">
-                                        <option value="">دسته را انتخاب کنید</option>
+                                        <option value=""> 😂😂دسته را انتخاب کنید</option>
                                         @foreach ($postCategories as $postCategory)
                                             <option value="{{ $postCategory->id }}"
                                                 @if (old('category_id') == $postCategory->id) selected @endif>{{ $postCategory->name }}
